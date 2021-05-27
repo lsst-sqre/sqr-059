@@ -227,8 +227,8 @@ Display Name
 The display name for a release is of the form ``Release
 r[major].[minor].patch``; thus ``r21_0_1`` has the display name ``Release
 r21.0.1``.  Additional components (cycle and extra) are permitted and
-will be appended (with underscores).  ``r21_0_1_c0020.002_20210703``
-becomes ``Release r21.0.1_c0020.002_20210703``.
+will be appended in the following form: ``r21_0_1_c0020.002_20210703``
+becomes ``Release r21.0.1 (SAL Cycle 0020, Build 002) [20210703]``.
 
 Semantic Version
 ^^^^^^^^^^^^^^^^
@@ -271,9 +271,9 @@ Display Name
 
 The display name is ``Weekly [year]_[week]``; ``w_2021_19`` has the
 display name ``Weekly 2021_19``.  As with releases and release
-candidates, additional components are simply appended.  Thus
-``w_2021_19_c0019.001`` would have the display name ``Weekly
-2021_19_c0019.001``.
+candidates, additional components are formatted and appended.  Thus
+``w_2021_19_c0019.001`` would have the display name
+``Weekly 2021_19 (SAL Cycle 0019, Build 001)``.
 
 Semantic Version
 ^^^^^^^^^^^^^^^^
@@ -307,7 +307,7 @@ Semantic Version
 ^^^^^^^^^^^^^^^^
 
 The version for a daily image is ``[year].[month].[day]``.
-``d_2021_05_11`` is simply ``2021_05_11``.  Additional components go
+``d_2021_05_11`` is simply ``2021.05.11``.  Additional components go
 into the build string, as for other image types.
 
 Release Candidate

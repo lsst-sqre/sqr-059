@@ -365,7 +365,7 @@ the display name is "Experimental", and then the rest of the tag
 following ``exp_`` is fed through the display name parsing process
 again; much of the time this will result in a sane display name string.
 For instance ``exp_w_2021_13_nosudo`` would yield
-``Experimental Weekly 2021_13_nosudo``.  If that re-parse fails, just
+``Experimental Weekly 2021_13 [nosudo]``.  If that re-parse fails, just
 use the string following ``exp_`` as the name.  For instance
 ``exp_ajt_test`` would give the display name ``Experimental ajt_test``.
 

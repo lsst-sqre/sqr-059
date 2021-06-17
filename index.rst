@@ -42,12 +42,6 @@
 
 .. sectnum::
 
-.. TODO: Delete the note below before merging new content to the master branch.
-
-.. note::
-
-   **This technote is not yet published.**
-
    We rely on particular tag formats to order and present Lab images to users.  This Technote is intended to formalize and document those formats.
 
 .. Add content here.

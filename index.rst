@@ -140,7 +140,9 @@ Alias tags are exactly those tags we do not expect to be stable.  There
 are currently two items in this category: the recommended tag, and
 ``latest``, which is defined by Docker as special and is the tag-of-last
 resort: if a docker image is specified without a tag, its tag is
-implicitly ``latest``.
+implicitly ``latest``.  Our builds include ``latest_weekly``,
+``latest_daily``, and ``latest_release`` tags, but Data Management does
+not make use of them in the spawner options form.
 
 The "recommended" tag is a singleton: it is always an alias pointing
 to the image that, at any moment in time, we believe most users should
@@ -152,7 +154,10 @@ versus ``recommended_summit``).
 
 Alias tags are passed in to the tag parsing machinery from the outside
 as a list of strings.  Only a tag that is an exact string match to one
-of those strings will be categorized as an alias tag.
+of those strings will be categorized as an alias tag.  If it is set, the
+"recommended" tag will always be prepended to the alias tag list.  If
+the alias tag list does not include ``latest``, even though that is by
+its nature an alias tag, the ``latest`` image will not be prepulled.
 
 Tag Format
 ^^^^^^^^^^
@@ -199,6 +204,9 @@ Most users will use the "recommended" tag most of the time, and the
 tag is generally applied to the most recent weekly build, as soon as it
 has been possible to certify a weekly build by subjecting it to our QA
 process.
+
+Any other defined alias tags will appear in the list between "recommended"
+and the first of the non-alias images.
 
 Release
 -------

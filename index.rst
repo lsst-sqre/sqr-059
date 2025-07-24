@@ -1,3 +1,11 @@
+######################################
+RSP Notebook container tag conventions
+######################################
+
+.. abstract::
+
+   We rely on particular tag formats to order and present Lab images to users.  This Technote is intended to formalize and document those formats.
+
 ..
   Technote content.
 
@@ -36,9 +44,7 @@
 
    Feel free to delete this instructional comment.
 
-:tocdepth: 1
 
-.. Please do not modify tocdepth; will be fixed when a new Sphinx theme is shipped.
 
 .. abstract::
 

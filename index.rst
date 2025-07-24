@@ -85,17 +85,31 @@ categorized as:
 Tag Fragments
 -------------
 
+Primary
+^^^^^^^
 The primary version of a tag is derived from (and in most cases identical to) the EUPS tag of the underlying DM stack included in the image.
 It is always the first component of the tag.
 
-Tags may include an identifier specifying the version of the RSP Jupyter machinery included.
+RSP Build Counter
+^^^^^^^^^^^^^^^^^
+
+Tags may include an identifier specifying an RSP image build count. 
+In general, release and release candidate builds (whether the first build of a given release/candidate tag or a rebuild) will increment this counter.
+Weekly, daily, and experimental builds will not.
+
 If specified, this goes directly after the primary component.
-It takes the form ``rspMajor.minor.patch`` where each of ``Major``, ``minor``, and ``patch`` is an integer, forming a (three-component) semantic version.
+It takes the form ``rspX`` where ``X`` is an integer and is separated from the primary tag with an underscore.
 
 Tags can additionally be postfixed with an optional Cycle number or a ``rest`` set of one-or-more underscore-separated fields.
 
+Cycle
+^^^^^
+
 The Cycle is currently unique to T&S RSP instances, and specifies the version of XML used in this image.
 It will have the form ``c<digits>.<digits>`` where the first group of digits is the cycle number and the second group of digits is the build iteration for that cycle, e.g. ``c0019.001``.
+
+Rest
+^^^^
 
 The ``rest`` fragment will most often encode a build datestamp, but can
 be anything (but see the discussion in "Semantic Versions").
@@ -215,7 +229,7 @@ e.g. ``r21_0_1``.
 Prior to Release 18, they were not underscore-separated, e.g. ``r170``.
 The first two digits are the major version, and the last one is the minor version.
 In this form, the patch version is always 0.
-RSP build version, cycle and rest are permitted, so, for instance, all of ``r_21_0_1_rsp1.2.3_c0019.001``, ``r_21_0_1_c0019.001``, ``r_21_0_1_20210703``, and ``r_21_0_1_rsp1.2.3_c0019.001_20210703`` are allowed.
+RSP build version, cycle and rest are permitted, so, for instance, all of ``r_21_0_1_rsp9_c0019.001``, ``r_21_0_1_c0019.001``, ``r_21_0_1_20210703``, and ``r_21_0_1_rsp9_c0019.001_20210703`` are allowed.
 
 Display Name
 ^^^^^^^^^^^^
@@ -223,8 +237,8 @@ Display Name
 The display name for a release is of the form ``Release
 r[major].[minor].patch``; thus ``r21_0_1`` has the display name ``Release
 r21.0.1``.
-Additional components (RSP version, cycle and extra) are permitted and will be appended in the following form: ``r21_0_1_rsp1.2.3_c0020.002_20210703``
-becomes ``Release r21.0.1 (RSP 1.2.3) (SAL Cycle 0020, Build 002) [20210703]``.
+Additional components (RSP version, cycle and extra) are permitted and will be appended in the following form: ``r21_0_1_rsp9_c0020.002_20210703``
+becomes ``Release r21.0.1 (RSP Build 9) (SAL Cycle 0020, Build 002) [20210703]``.
 
 Semantic Version
 ^^^^^^^^^^^^^^^^
@@ -237,7 +251,7 @@ Thus: ``r21_0_1_c0020.002_20210703`` would have the semantic version ``21.0.1+c0
 The RSP version is not included in the tag's semantic version (there is no room for it, and overloading the prerelease field yields undesirable sorting properties); it is, however, considered by the Nublado controller when constructing sort order.
 Specifically, it is considered after the primary version and before the cycle information when building a sort order.
 Any image lacking an RSP version sorts lower than an image with an RSP version.
-That is, "r21_0_1" will be sorted below "r21_0_1_rsp1.2.3".
+That is, "r21_0_1" will be sorted below "r21_0_1_rsp9".
 
 Notes on "release" category
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -257,9 +271,9 @@ Tag Format
 ^^^^^^^^^^
 
 Weekly tags are of the form ``w_[year]_[week]``, e.g. ``w_2021_19``.
-They may have additional RSP version, cycle and rest components;
+They may have additional cycle and rest components;
 ``w_2021_19_c0019.001`` is an acceptable weekly tag, for instance, as is
-``w_2021_19_rsp1.2.3_20210513`` or indeed ``w_2021_19_rsp1.2.3_c0019.001_20210513``.
+``w_2021_19_20210513`` or indeed ``w_2021_19_c0019.001_20210513``.
 
 Display Name
 ^^^^^^^^^^^^
@@ -267,8 +281,8 @@ Display Name
 The display name is ``Weekly [year]_[week]``; ``w_2021_19`` has the
 display name ``Weekly 2021_19``.
 As with releases and release candidates, additional components are formatted and appended.
-Thus ``w_2021_19_rsp1.2.3_c0019.001`` would have the display name
-``Weekly 2021_19 (RSP 1.2.3) (SAL Cycle 0019, Build 001)``.
+Thus ``w_2021_19_c0019.001`` would have the display name
+``Weekly 2021_19 (SAL Cycle 0019, Build 001)``.
 
 Semantic Version
 ^^^^^^^^^^^^^^^^
@@ -277,7 +291,6 @@ A weekly's semantic version is ``[year].[week].0``.  ``w_2021_19`` has
 the version ``2021.19.0``.  Any additional components are used as the
 semver ``build`` string (with underscores replaced by periods), so
 ``w_2021_19_c0019.001`` would become ``2021.19.0+c0019.001``.
-As with release versions, the RSP version information does not contribute to the image's semantic version.
 
 Daily
 -----
@@ -318,7 +331,7 @@ Tag Format
 
 The tag format is exactly that of a release format, with an additional
 underscore-separated component, ``rc[number]``.
-RSP version, cycle and rest are permitted.
+RSP build version, cycle and rest are permitted.
 
 Display Name
 ^^^^^^^^^^^^

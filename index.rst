@@ -94,8 +94,9 @@ RSP Build Counter
 ^^^^^^^^^^^^^^^^^
 
 Tags may include an identifier specifying an RSP image build count. 
-In general, release and release candidate builds (whether the first build of a given release/candidate tag or a rebuild) will increment this counter.
-Weekly, daily, and experimental builds will not.
+In general, any run of the GitHub Action that builds a sciplat-lab image will increment this counter.
+It is currently in the 2000s, and we do not anticipate it exceeding 10,000 during the lifetime of the project.
+We anticipate only including this counter in Release, Release Candidate, and Experimental builds derived from one of the former two categories, although it will continue to increment with each build regardless of type.
 
 If specified, this goes directly after the primary component.
 It takes the form ``rspX`` where ``X`` is an integer and is separated from the primary tag with an underscore.
